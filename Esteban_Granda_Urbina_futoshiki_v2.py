@@ -2320,7 +2320,7 @@ def VentanaPrincipal():
     Boton3=Button(Ventana_C,text="Top 10",width='11',height='3',font=("Arial",15),bg='#DBEB1C',fg="black",command=top)
     Boton3.place(x=460,y=300)
     def manual():#abre el manual
-        os.startfile("Esteban_Granda_Urbina_manual_de_usuario_futoshiki.pdf")
+        os.startfile("Esteban_Granda_Urbina_manual_de_usuario_futoshiki_v2.pdf")
     Boton4=Button(Ventana_C,text="Ayuda",width='11',height='3',font=("Arial",15),bg='grey',fg="black",command=manual)
     Boton4.place(x=160,y=400)
     def info():#muestra la informacion del programa

@@ -2309,7 +2309,7 @@ def VentanaPrincipal():
                 p+=25
         def ok():
             Ventana_Top.destroy()
-        btok=Button(Ventana_T,text="ok",width='7',height='2',command=ok)
+        btok=Button(Ventana_Top,text="ok",width='7',height='2',command=ok)
         btok.place(x=200,y=450)
         
     #botones

@@ -8,6 +8,7 @@ import pickle
 import random
 import os
 import sys
+import pdfkit
 def VentanaPrincipal():
     #configuracion ventana principal
     Ventana_C=Tk()
@@ -2309,8 +2310,14 @@ def VentanaPrincipal():
                 p+=25
         def ok():
             Ventana_Top.destroy()
+        def imprime():
+            contenido=0
+            for i in top10:
+                n=0
+        btpdf=Button(Ventana_Top,text="imprimir",width='7',height='2',command=imprime)
+        btpdf.place(x=100,y=450)
         btok=Button(Ventana_Top,text="ok",width='7',height='2',command=ok)
-        btok.place(x=200,y=450)
+        btok.place(x=300,y=450)
         
     #botones
     Boton1=Button(Ventana_C,text="Iniciar Juego",width='11',height='3',font=("Arial",15),bg='red',fg="black",command=lambda:jugar(Nombre_text.get(),var.get(),var2.get(),var3.get()))

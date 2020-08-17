@@ -10,6 +10,8 @@ import os
 import sys
 import fpdf
 from fpdf import FPDF
+global continuo
+continuo=0
 def VentanaPrincipal():
     #configuracion ventana principal
     Ventana_C=Tk()
@@ -60,7 +62,22 @@ def VentanaPrincipal():
     RadioButton7.place(x=310,y=210)
     RadioButton8=Radiobutton(Ventana_C, text='Dificil',variable=var3,value=3)
     RadioButton8.place(x=310,y=230)
+    #funcion de multinivel
+    global continuo
+    continuo=0
+    def multinivel():
+        global continuo
+        if continuo==1:
+            continuo=0
+            Botonnivel["bg"]="grey"
+            Botonnivel["text"]="Multinivel: Apagado"
+        else:
+            continuo=1
+            Botonnivel["bg"]="green"
+            Botonnivel["text"]="Multinivel: Encendido"
     #boton de multinivel
+    Botonnivel=Button(Ventana_C,text="Multinivel: Apagado",width='17',height='2',font=("Arial",15),bg='grey',fg="black",command=multinivel)
+    Botonnivel.place(x=280,y=660)
     #archivo de juegos
     filesize=os.path.getsize("futoshiki2020partidas.dat")
     if filesize==0:
@@ -72,7 +89,7 @@ def VentanaPrincipal():
         pickle.dump(listadefinitiva,a)
         a.close()
     #el juego nuevo
-    def jugar(Nombre,reloj,lado,dificultad):
+    def jugar(Nombre,reloj,lado,dificultad,continuo):
         if Nombre=="" or reloj==0 or lado==0 or dificultad==0:#control de errores
             messagebox.showerror(message="Error, entradas incompletas")
         else:
@@ -122,6 +139,9 @@ def VentanaPrincipal():
             global puntaje
             global top10
             global listaborrada
+            global nivelmult
+            global dificultadC
+            dificultadC=dificultad
             uno="1"
             dos="2"
             tres="3"
@@ -144,6 +164,7 @@ def VentanaPrincipal():
             if isinstance(dificultad,list):
                 lista=dificultad[2]
                 cuadricula=dificultad[1]
+                nivelmult=dificultad[3]
                 btn0=cuadricula[0][0]
                 btn1=cuadricula[0][1]
                 btn2=cuadricula[0][2]
@@ -198,6 +219,7 @@ def VentanaPrincipal():
                 btn23=0
                 btn24=0
                 lista=[]
+                nivelmult=0
                 cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
             #funciones de borrado de jugadas
             def borra_todo():
@@ -420,7 +442,7 @@ def VentanaPrincipal():
                     boton22["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==23:
-                    listaborrada.append((lista[-1],btn22))
+                    listaborrada.append((lista[-1],btn23))
                     btn23=0
                     lista=lista[:-1]
                     num=""
@@ -437,6 +459,10 @@ def VentanaPrincipal():
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
             #encuentra si ya se ganó
             def ganar(cuadricula):
+                global continuo
+                global dificultadC
+                if isinstance(dificultadC,list):
+                    dificultadC=dificultadC[0]
                 ceros=0
                 for i in cuadricula:
                     for j in i:
@@ -446,9 +472,26 @@ def VentanaPrincipal():
                     if reloj==1:
                         parar()
                     Boton4_J["state"]=DISABLED
-                    Mensaje_ganar=Message(Ventana_J,text="¡EXCELENTE! JUEGO TERMINADO CON ÉXITO",width='885',font=("Comic Sans",40),bg="#C2D8FB",fg="black")
-                    Mensaje_ganar.place(x=10,y=475)
+                    Boton5_J["state"]=DISABLED
+                    Boton6_J["state"]=DISABLED
+                    Boton0_num["state"]=DISABLED
+                    Boton1_num["state"]=DISABLED
+                    Boton2_num["state"]=DISABLED
+                    Boton3_num["state"]=DISABLED
+                    Boton4_num["state"]=DISABLED
+                    if continuo==0:
+                        Mensaje_ganar=Message(Ventana_J,text="¡EXCELENTE! JUEGO TERMINADO CON ÉXITO",width='885',font=("Comic Sans",40),bg="#C2D8FB",fg="black")
+                        Mensaje_ganar.place(x=10,y=475)
+                    elif continuo==1 and dificultadC <3:
+                        Mensaje_ganar=Message(Ventana_J,text="¡EXCELENTE! NIVEL TERMINADO CON ÉXITO",width='885',font=("Comic Sans",40),bg="#C2D8FB",fg="black")
+                        Mensaje_ganar.place(x=10,y=475)
+                    else:
+                        continuo=0
+                        Mensaje_ganar=Message(Ventana_J,text="¡EXCELENTE! JUEGO TERMINADO CON ÉXITO",width='885',font=("Comic Sans",40),bg="#C2D8FB",fg="black")
+                        Mensaje_ganar.place(x=10,y=475)
                     def cerrar():
+                        global continuo
+                        global dificultadC
                         filesize=os.path.getsize("futoshiki2020top10.dat")
                         if filesize!=0:
                             file = open("futoshiki2020top10.dat","r+")
@@ -458,9 +501,16 @@ def VentanaPrincipal():
                         y=open("futoshiki2020top10.dat","wb")
                         pickle.dump(top10,y)
                         y.close()
-                        Ventana_J.destroy()
-                        Ventana_C.destroy()
-                    btfin=Button(Ventana_J,text="Fin",width='11',height='3',command=cerrar)
+                        if continuo==1:
+                            Ventana_J.destroy()
+                            jugar(Nombre,reloj,lado,dificultadC+1,continuo)
+                        else:
+                            Ventana_J.destroy()
+                            Ventana_C.destroy()
+                    if continuo==0:
+                        btfin=Button(Ventana_J,text="Fin",width='11',height='3',command=cerrar)
+                    else:
+                        btfin=Button(Ventana_J,text="siguiente",width='11',height='3',command=cerrar)
                     btfin.place(x=300,y=200)
             #funciones de los botones de la cuadricula
             def numero(n):
@@ -1812,7 +1862,7 @@ def VentanaPrincipal():
                         Ventana_Z.title('Futoshiki')
                         Ventana_Z.config(bg='beige')
                         Ventana_Z.resizable(width= False, height=False)
-                        Mensaje_tiempo=Label(Ventana_Z,text="Se acabó el tiempo, desea continuar",font=("Arial",10),bg='beige')
+                        Mensaje_tiempo=Label(Ventana_Z,text="Se acabó el tiempo, desea continuar?",font=("Arial",10),bg='beige')
                         Mensaje_tiempo.place(x=25,y=10)
                         def aceptarT():
                             global reloj
@@ -2313,7 +2363,8 @@ def VentanaPrincipal():
                     file.truncate(0)
                     file.close()
                 d=open("futoshiki2020juegoactual.dat","wb")
-                pickle.dump([Nombre,reloj,lado,[plantilla,cuadricula,lista]],d)
+                reloj=reloj.get()
+                pickle.dump([Nombre,reloj,lado,[plantilla,cuadricula,lista,nivelmult],continuo],d)
                 d.close()
             #rehace jugada
             def rehacer():
@@ -2597,7 +2648,7 @@ def VentanaPrincipal():
             x=open("futoshiki2020juegoactual.dat","rb")
             cosa=pickle.load(x)
             x.close()
-            jugar(cosa[0],cosa[1],cosa[2],cosa[3])
+            jugar(cosa[0],cosa[1],cosa[2],cosa[3],cosa[4])
     #muestra el top 10
     def top():
         n=0
@@ -2608,6 +2659,18 @@ def VentanaPrincipal():
         q.close()
         if len(top10)>10:
             top10=top10[0:10]
+        listatemporal=[]
+        nuevotop10=[]
+        for i in top10:
+            if isinstance(i,tuple):
+                listatemporal.append(i[1])#problema no lo ordena
+        while len(nuevotop10)!=len(top10):
+            numerotemporal=min(listatemporal)
+            indice=listatemporal.index(numerotemporal)
+            nuevotop10.append(top10[indice])
+            listatemporal.remove(numerotemporal)
+            listatemporal.insert(indice,9999999999999999999)
+        top10=nuevotop10
         Ventana_Top=Tk()
         Ventana_Top.geometry('500x500+200+300')
         Ventana_Top.title('Futoshiki')
@@ -2645,7 +2708,7 @@ def VentanaPrincipal():
         btok=Button(Ventana_Top,text="ok",width='7',height='2',command=ok)
         btok.place(x=300,y=450)      
     #botones
-    Boton1=Button(Ventana_C,text="Iniciar Juego",width='11',height='3',font=("Arial",15),bg='red',fg="black",command=lambda:jugar(Nombre_text.get(),var.get(),var2.get(),var3.get()))
+    Boton1=Button(Ventana_C,text="Iniciar Juego",width='11',height='3',font=("Arial",15),bg='red',fg="black",command=lambda:jugar(Nombre_text.get(),var.get(),var2.get(),var3.get(),continuo))
     Boton1.place(x=160,y=300)
     Boton2=Button(Ventana_C,text="Cargar Juego",width='11',height='3',font=("Arial",15),bg='#A1FBD5',fg="black",command=cargar)
     Boton2.place(x=310,y=300)

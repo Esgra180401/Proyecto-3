@@ -2661,21 +2661,23 @@ def VentanaPrincipal():
             top10=top10[0:10]
         listatemporal=[]
         nuevotop10=[]
-        
         for i in top10:
             if isinstance(i,tuple):
                 listatemporal.append(i[1])
             else:
                 top10.remove(i)
-        print(top10)
-        print(listatemporal)
-        while len(nuevotop10)!=len(top10):
-            numerotemporal=min(listatemporal)
-            indice=listatemporal.index(numerotemporal)
-            nuevotop10.append(top10[indice])
-            listatemporal.remove(numerotemporal)
-            listatemporal.insert(indice,99999999999999999)
-        #top10=nuevotop10
+        listatemporal.sort()
+        while listatemporal!=[]:
+            for i in top10:
+                if isinstance(i,tuple):
+                    if i[1]==listatemporal[0]:
+                        nuevotop10.append(i)
+                        listatemporal=listatemporal[1:]
+                        if listatemporal==[]:
+                            break
+                else:
+                    top10.remove(i)
+        top10=nuevotop10
         Ventana_Top=Tk()
         Ventana_Top.geometry('500x500+200+300')
         Ventana_Top.title('Futoshiki')

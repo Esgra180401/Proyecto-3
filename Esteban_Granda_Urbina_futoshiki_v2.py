@@ -60,6 +60,7 @@ def VentanaPrincipal():
     RadioButton7.place(x=310,y=210)
     RadioButton8=Radiobutton(Ventana_C, text='Dificil',variable=var3,value=3)
     RadioButton8.place(x=310,y=230)
+    #boton de multinivel
     #archivo de juegos
     filesize=os.path.getsize("futoshiki2020partidas.dat")
     if filesize==0:
@@ -120,6 +121,7 @@ def VentanaPrincipal():
             global algo
             global puntaje
             global top10
+            global listaborrada
             uno="1"
             dos="2"
             tres="3"
@@ -138,6 +140,7 @@ def VentanaPrincipal():
                 y=open("futoshiki2020top10.dat","rb")
                 top10=pickle.load(y)
                 y.close()
+            listaborrada=[]
             if isinstance(dificultad,list):
                 lista=dificultad[2]
                 cuadricula=dificultad[1]
@@ -201,6 +204,7 @@ def VentanaPrincipal():
                 while lista!=[]:
                     anterior()
             def anterior():
+                global listaborrada
                 global lista
                 global num
                 global btn0
@@ -232,6 +236,7 @@ def VentanaPrincipal():
                 if lista==[]:
                     messagebox.showerror(message="Error, ya no hay jugadas anteriores a esta")
                 elif lista[-1]==0:
+                    listaborrada.append((lista[-1],btn0))
                     btn0=0
                     lista=lista[:-1]
                     num=""
@@ -239,6 +244,7 @@ def VentanaPrincipal():
                     boton0["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==1:
+                    listaborrada.append((lista[-1],btn1))
                     btn1=0
                     lista=lista[:-1]
                     num=""
@@ -246,6 +252,7 @@ def VentanaPrincipal():
                     boton1["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==2:
+                    listaborrada.append((lista[-1],btn2))
                     btn2=0
                     lista=lista[:-1]
                     num=""
@@ -253,6 +260,7 @@ def VentanaPrincipal():
                     boton2["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==3:
+                    listaborrada.append((lista[-1],btn3))
                     btn3=0
                     lista=lista[:-1]
                     num=""
@@ -260,6 +268,7 @@ def VentanaPrincipal():
                     boton3["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==4:
+                    listaborrada.append((lista[-1],btn4))
                     btn4=0
                     lista=lista[:-1]
                     num=""
@@ -267,6 +276,7 @@ def VentanaPrincipal():
                     boton4["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==5:
+                    listaborrada.append((lista[-1],btn5))
                     btn5=0
                     lista=lista[:-1]
                     num=""
@@ -274,6 +284,7 @@ def VentanaPrincipal():
                     boton5["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==6:
+                    listaborrada.append((lista[-1],btn6))
                     btn6=0
                     lista=lista[:-1]
                     num=""
@@ -281,6 +292,7 @@ def VentanaPrincipal():
                     boton6["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==7:
+                    listaborrada.append((lista[-1],btn7))
                     btn7=0
                     lista=lista[:-1]
                     num=""
@@ -288,6 +300,7 @@ def VentanaPrincipal():
                     boton7["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==8:
+                    listaborrada.append((lista[-1],btn8))
                     btn8=0
                     lista=lista[:-1]
                     num=""
@@ -295,6 +308,7 @@ def VentanaPrincipal():
                     boton8["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==9:
+                    listaborrada.append((lista[-1],btn9))
                     btn9=0
                     lista=lista[:-1]
                     num=""
@@ -302,6 +316,7 @@ def VentanaPrincipal():
                     boton9["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==10:
+                    listaborrada.append((lista[-1],btn10))
                     btn10=0
                     lista=lista[:-1]
                     num=""
@@ -309,6 +324,7 @@ def VentanaPrincipal():
                     boton10["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==11:
+                    listaborrada.append((lista[-1],btn11))
                     btn11=0
                     lista=lista[:-1]
                     num=""
@@ -316,6 +332,7 @@ def VentanaPrincipal():
                     boton11["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==12:
+                    listaborrada.append((lista[-1],btn12))
                     btn12=0
                     lista=lista[:-1]
                     num=""
@@ -323,6 +340,7 @@ def VentanaPrincipal():
                     boton12["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==13:
+                    listaborrada.append((lista[-1],btn13))
                     btn13=0
                     lista=lista[:-1]
                     num=""
@@ -330,6 +348,7 @@ def VentanaPrincipal():
                     boton13["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==14:
+                    listaborrada.append((lista[-1],btn14))
                     btn14=0
                     lista=lista[:-1]
                     num=""
@@ -337,6 +356,7 @@ def VentanaPrincipal():
                     boton14["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==15:
+                    listaborrada.append((lista[-1],btn15))
                     btn15=0
                     lista=lista[:-1]
                     num=""
@@ -344,6 +364,7 @@ def VentanaPrincipal():
                     boton15["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==16:
+                    listaborrada.append((lista[-1],btn16))
                     btn16=0
                     lista=lista[:-1]
                     num=""
@@ -351,6 +372,7 @@ def VentanaPrincipal():
                     boton16["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==17:
+                    listaborrada.append((lista[-1],btn17))
                     btn17=0
                     lista=lista[:-1]
                     num=""
@@ -358,6 +380,7 @@ def VentanaPrincipal():
                     boton17["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==18:
+                    listaborrada.append((lista[-1],btn18))
                     btn18=0
                     lista=lista[:-1]
                     num=""
@@ -365,6 +388,7 @@ def VentanaPrincipal():
                     boton18["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==19:
+                    listaborrada.append((lista[-1],btn19))
                     btn19=0
                     lista=lista[:-1]
                     num=""
@@ -372,6 +396,7 @@ def VentanaPrincipal():
                     boton19["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==20:
+                    listaborrada.append((lista[-1],btn20))
                     btn20=0
                     lista=lista[:-1]
                     num=""
@@ -379,6 +404,7 @@ def VentanaPrincipal():
                     boton20["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==21:
+                    listaborrada.append((lista[-1],btn21))
                     btn21=0
                     lista=lista[:-1]
                     num=""
@@ -386,6 +412,7 @@ def VentanaPrincipal():
                     boton21["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==22:
+                    listaborrada.append((lista[-1],btn22))
                     btn22=0
                     lista=lista[:-1]
                     num=""
@@ -393,6 +420,7 @@ def VentanaPrincipal():
                     boton22["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==23:
+                    listaborrada.append((lista[-1],btn22))
                     btn23=0
                     lista=lista[:-1]
                     num=""
@@ -400,6 +428,7 @@ def VentanaPrincipal():
                     boton23["state"]='normal'
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
                 elif lista[-1]==24:
+                    listaborrada.append((lista[-1],btn24))
                     btn24=0
                     lista=lista[:-1]
                     num=""
@@ -472,6 +501,8 @@ def VentanaPrincipal():
                 global num
                 global btn0
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[0]:
@@ -522,6 +553,8 @@ def VentanaPrincipal():
                 global num
                 global btn1
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[1]:
@@ -572,6 +605,8 @@ def VentanaPrincipal():
                 global num
                 global btn2
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[2]:
@@ -622,6 +657,8 @@ def VentanaPrincipal():
                 global num
                 global btn3
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[3]:
@@ -672,6 +709,8 @@ def VentanaPrincipal():
                 global num
                 global btn4
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[4]:
@@ -714,6 +753,8 @@ def VentanaPrincipal():
                 global num
                 global btn5
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[0]:
@@ -764,6 +805,8 @@ def VentanaPrincipal():
                 global num
                 global btn6
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[1]:
@@ -814,6 +857,8 @@ def VentanaPrincipal():
                 global num
                 global btn7
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[2]:
@@ -864,6 +909,8 @@ def VentanaPrincipal():
                 global num
                 global btn8
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[3]:
@@ -914,6 +961,8 @@ def VentanaPrincipal():
                 global num
                 global btn9
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[4]:
@@ -956,6 +1005,8 @@ def VentanaPrincipal():
                 global num
                 global btn10
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[0]:
@@ -1006,6 +1057,8 @@ def VentanaPrincipal():
                 global num
                 global btn11
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[1]:
@@ -1056,6 +1109,8 @@ def VentanaPrincipal():
                 global num
                 global btn12
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[2]:
@@ -1106,6 +1161,8 @@ def VentanaPrincipal():
                 global num
                 global btn13
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[3]:
@@ -1156,6 +1213,8 @@ def VentanaPrincipal():
                 global num
                 global btn14
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[4]:
@@ -1198,6 +1257,8 @@ def VentanaPrincipal():
                 global num
                 global btn15
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[0]:
@@ -1248,6 +1309,8 @@ def VentanaPrincipal():
                 global num
                 global btn16
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[1]:
@@ -1298,6 +1361,8 @@ def VentanaPrincipal():
                 global num
                 global btn17
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[2]:
@@ -1348,6 +1413,8 @@ def VentanaPrincipal():
                 global num
                 global btn18
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[3]:
@@ -1398,6 +1465,8 @@ def VentanaPrincipal():
                 global num
                 global btn19
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[4]:
@@ -1440,6 +1509,8 @@ def VentanaPrincipal():
                 global num
                 global btn20
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[0]:
@@ -1482,6 +1553,8 @@ def VentanaPrincipal():
                 global num
                 global btn21
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[1]:
@@ -1524,6 +1597,8 @@ def VentanaPrincipal():
                 global num
                 global btn22
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[2]:
@@ -1566,6 +1641,8 @@ def VentanaPrincipal():
                 global num
                 global btn23
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[3]:
@@ -1608,6 +1685,8 @@ def VentanaPrincipal():
                 global num
                 global btn24
                 global cuadricula
+                global listaborrada
+                listaborrada=[]
                 cumple=0
                 for i in cuadricula:
                     if num==i[4]:
@@ -2238,7 +2317,237 @@ def VentanaPrincipal():
                 d.close()
             #rehace jugada
             def rehacer():
-                n=0
+                global listaborrada
+                global lista
+                global num
+                global btn0
+                global btn1
+                global btn2
+                global btn3
+                global btn4
+                global btn5
+                global btn6
+                global btn7
+                global btn8
+                global btn9
+                global btn10
+                global btn11
+                global btn12
+                global btn13
+                global btn14
+                global btn15
+                global btn16
+                global btn17
+                global btn18
+                global btn19
+                global btn20
+                global btn21
+                global btn22
+                global btn23
+                global btn24
+                global cuadricula
+                if listaborrada==[]:
+                    messagebox.showerror(message="Error, ya no hay jugadas borradas")
+                elif listaborrada[-1][0]==0:
+                    btn0=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton0["text"]=num
+                    boton0["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==1:
+                    btn1=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton1["text"]=num
+                    boton1["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==2:
+                    btn2=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton2["text"]=num
+                    boton2["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==3:
+                    btn3=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton3["text"]=num
+                    boton3["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==4:
+                    btn4=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton4["text"]=num
+                    boton4["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==5:
+                    btn5=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton5["text"]=num
+                    boton5["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==6:
+                    btn6=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton6["text"]=num
+                    boton6["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==7:
+                    btn7=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton7["text"]=num
+                    boton7["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==8:
+                    btn8=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton8["text"]=num
+                    boton8["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==9:
+                    btn9=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton9["text"]=num
+                    boton9["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==10:
+                    btn10=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton10["text"]=num
+                    boton10["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==11:
+                    btn11=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton11["text"]=num
+                    boton11["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==12:
+                    btn12=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton12["text"]=num
+                    boton12["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==13:
+                    btn13=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton13["text"]=num
+                    boton13["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==14:
+                    btn14=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton14["text"]=num
+                    boton14["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==15:
+                    btn15=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton15["text"]=num
+                    boton15["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==16:
+                    btn16=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton16["text"]=num
+                    boton16["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==17:
+                    btn17=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton17["text"]=num
+                    boton17["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==18:
+                    btn18=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton18["text"]=num
+                    boton18["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==19:
+                    btn19=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton19["text"]=num
+                    boton19["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==20:
+                    btn20=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton20["text"]=num
+                    boton20["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==21:
+                    btn21=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton21["text"]=num
+                    boton21["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==22:
+                    btn22=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton22["text"]=num
+                    boton22["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==23:
+                    btn23=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton23["text"]=num
+                    boton23["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                elif listaborrada[-1][0]==24:
+                    btn24=listaborrada[-1][1]
+                    lista.append(listaborrada[-1][0])
+                    num=listaborrada[-1][1]
+                    listaborrada=listaborrada[:-1]
+                    boton24["text"]=num
+                    boton24["state"]=DISABLED
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
             #soluciona el futoshiki
             def solucionar():
                 n=0

@@ -2236,6 +2236,12 @@ def VentanaPrincipal():
                 d=open("futoshiki2020juegoactual.dat","wb")
                 pickle.dump([Nombre,reloj,lado,[plantilla,cuadricula,lista]],d)
                 d.close()
+            #rehace jugada
+            def rehacer():
+                n=0
+            #soluciona el futoshiki
+            def solucionar():
+                n=0
             #botones
             Boton1_J=Button(Ventana_J,text="Borrar Jugada",width='13',height='3',font=("Arial",15),bg='#EF9A54',fg="black",state=Estado,command=anterior)
             Boton1_J.place(x=25,y=520)
@@ -2245,6 +2251,10 @@ def VentanaPrincipal():
             Boton3_J.place(x=425,y=520)
             Boton4_J=Button(Ventana_J,text="Guardar Juego",width='13',height='3',font=("Arial",15),bg='#8E9CFF',fg="black",state=Estado,command=guardar)
             Boton4_J.place(x=625,y=520)
+            Boton5_J=Button(Ventana_J,text="Rehacer Jugada",width='13',height='3',font=("Arial",15),bg='#BFE1BB',fg="black",state=Estado,command=rehacer)
+            Boton5_J.place(x=425,y=620)
+            Boton6_J=Button(Ventana_J,text="Solucionar Juego",width='13',height='3',font=("Arial",15),bg='grey',fg="black",state=Estado,command=solucionar)
+            Boton6_J.place(x=625,y=620)
             #columna de numeros
             if lado==2:
                 Boton0_num=Button(Ventana_J,text=uno,width='3',height='1',font=("Arial",15),bg='white',fg="black",state=Estado,command=lambda:numero(uno))

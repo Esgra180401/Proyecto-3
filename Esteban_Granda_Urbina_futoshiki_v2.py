@@ -2602,6 +2602,9 @@ def VentanaPrincipal():
             #soluciona el futoshiki
             def solucionar():
                 n=0
+            #da sugerencias posibles para una casilla
+            def sugerencia():
+                nada=0
             #botones
             Boton1_J=Button(Ventana_J,text="Borrar Jugada",width='13',height='3',font=("Arial",15),bg='#EF9A54',fg="black",state=Estado,command=anterior)
             Boton1_J.place(x=25,y=520)
@@ -2627,6 +2630,8 @@ def VentanaPrincipal():
                 Boton3_num.place(x=700,y=320)
                 Boton4_num=Button(Ventana_J,text=cinco,width='3',height='1',font=("Arial",15),bg='white',fg="black",state=Estado,command=lambda:numero(cinco))
                 Boton4_num.place(x=700,y=370)
+                Botonsugerencia=Button(Ventana_J,text="Posibles Jugadas: Apagado",width='23',height='2',font=("Arial",8),bg='white',fg="black",state=Estado,command=sugerencia)
+                Botonsugerencia.place(x=10,y=270)
             else:
                 Boton0_num=Button(Ventana_J,text=uno,width='3',height='1',font=("Arial",15),bg='white',fg="black",state=Estado,command=lambda:numero(uno))
                 Boton0_num.place(x=50,y=170)
@@ -2638,6 +2643,8 @@ def VentanaPrincipal():
                 Boton3_num.place(x=50,y=320)
                 Boton4_num=Button(Ventana_J,text=cinco,width='3',height='1',font=("Arial",15),bg='white',fg="black",state=Estado,command=lambda:numero(cinco))
                 Boton4_num.place(x=50,y=370)
+                Botonsugerencia=Button(Ventana_J,text="Posibles Jugadas: Apagado",width='23',height='2',font=("Arial",8),bg='white',fg="black",state=Estado,command=sugerencia)
+                Botonsugerencia.place(x=630,y=270)
             Ventana_J.mainloop()
     #carga la partida
     def cargar():

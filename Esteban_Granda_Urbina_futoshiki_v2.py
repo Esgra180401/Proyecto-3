@@ -141,6 +141,10 @@ def VentanaPrincipal():
             global listaborrada
             global nivelmult
             global dificultadC
+            global sugerido
+            global relojC
+            relojC=reloj
+            sugerido=0
             dificultadC=dificultad
             uno="1"
             dos="2"
@@ -223,6 +227,9 @@ def VentanaPrincipal():
                 cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
             #funciones de borrado de jugadas
             def borra_todo():
+                global sugerido
+                if sugerido==1:
+                    sugerencia()
                 while lista!=[]:
                     anterior()
             def anterior():
@@ -255,6 +262,9 @@ def VentanaPrincipal():
                 global btn23
                 global btn24
                 global cuadricula
+                global sugerido
+                if sugerido==1:
+                    sugerencia()
                 if lista==[]:
                     messagebox.showerror(message="Error, ya no hay jugadas anteriores a esta")
                 elif lista[-1]==0:
@@ -552,1229 +562,1579 @@ def VentanaPrincipal():
                 global btn0
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[0]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[0]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[0]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[0]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==0 and i[2]==0:
-                        if btn1!=0 and btn5!=0:
-                            if i[0]=="<":
-                                if num>=btn1:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn1:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn5:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn5:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn0=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton0["text"]=num
-                        boton0["state"]=DISABLED
-                        lista.append(0)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==0:
+                            if btn1!=0 and btn5!=0:
+                                if i[0]=="<":
+                                    if num>=btn1:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn1:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn5:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn5:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn0=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton0["text"]=num
+                            boton0["state"]=DISABLED
+                            lista.append(0)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)  
             def original1():
                 global num
                 global btn1
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[1]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[1]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[0]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[0]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==0 and i[2]==1:
-                        if btn2!=0 and btn6!=0:
-                            if i[0]=="<":
-                                if num>=btn2:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn2:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn6:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn6:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn1=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton1["text"]=num
-                        boton1["state"]=DISABLED
-                        lista.append(1)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==1:
+                            if btn2!=0 and btn6!=0:
+                                if i[0]=="<":
+                                    if num>=btn2:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn2:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn6:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn6:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn1=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton1["text"]=num
+                            boton1["state"]=DISABLED
+                            lista.append(1)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original2():
                 global num
                 global btn2
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[2]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[2]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[0]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[0]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==0 and i[2]==2:
-                        if btn3!=0 and btn7!=0:
-                            if i[0]=="<":
-                                if num>=btn3:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn3:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn7:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn7:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn2=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton2["text"]=num
-                        boton2["state"]=DISABLED
-                        lista.append(2)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==2:
+                            if btn3!=0 and btn7!=0:
+                                if i[0]=="<":
+                                    if num>=btn3:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn3:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn7:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn7:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn2=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton2["text"]=num
+                            boton2["state"]=DISABLED
+                            lista.append(2)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original3():
                 global num
                 global btn3
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[3]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[3]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[0]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[0]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==0 and i[2]==3:
-                        if btn4!=0 and btn8!=0:
-                            if i[0]=="<":
-                                if num>=btn4:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn4:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn8:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn8:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn3=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton3["text"]=num
-                        boton3["state"]=DISABLED
-                        lista.append(3)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==3:
+                            if btn4!=0 and btn8!=0:
+                                if i[0]=="<":
+                                    if num>=btn4:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn4:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn8:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn8:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn3=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton3["text"]=num
+                            boton3["state"]=DISABLED
+                            lista.append(3)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original4():
                 global num
                 global btn4
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[4]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[4]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[0]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[0]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==0 and i[2]==4:
-                        if  btn9!=0:
-                            if i[0]=="v":
-                                if num<=btn9:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn9:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn4=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton4["text"]=num
-                        boton4["state"]=DISABLED
-                        lista.append(4)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==4:
+                            if  btn9!=0:
+                                if i[0]=="v":
+                                    if num<=btn9:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn9:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn4=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton4["text"]=num
+                            boton4["state"]=DISABLED
+                            lista.append(4)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original5():
                 global num
                 global btn5
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[0]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[0]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[1]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[1]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==1 and i[2]==0:
-                        if btn6!=0 and btn10!=0:
-                            if i[0]=="<":
-                                if num>=btn6:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn6:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn10:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn10:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn5=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton5["text"]=num
-                        boton5["state"]=DISABLED
-                        lista.append(5)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==0:
+                            if btn6!=0 and btn10!=0:
+                                if i[0]=="<":
+                                    if num>=btn6:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn6:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn10:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn10:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn5=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton5["text"]=num
+                            boton5["state"]=DISABLED
+                            lista.append(5)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original6():
                 global num
                 global btn6
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[1]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[1]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[1]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[1]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==1 and i[2]==1:
-                        if btn7!=0 and btn11!=0:
-                            if i[0]=="<":
-                                if num>=btn7:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn7:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn11:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn11:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn6=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton6["text"]=num
-                        boton6["state"]=DISABLED
-                        lista.append(6)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==1:
+                            if btn7!=0 and btn11!=0:
+                                if i[0]=="<":
+                                    if num>=btn7:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn7:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn11:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn11:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn6=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton6["text"]=num
+                            boton6["state"]=DISABLED
+                            lista.append(6)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original7():
                 global num
                 global btn7
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[2]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[2]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[1]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[1]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==1 and i[2]==2:
-                        if btn8!=0 and btn12!=0:
-                            if i[0]=="<":
-                                if num>=btn8:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn8:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn12:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn12:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn7=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton7["text"]=num
-                        boton7["state"]=DISABLED
-                        lista.append(7)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==2:
+                            if btn8!=0 and btn12!=0:
+                                if i[0]=="<":
+                                    if num>=btn8:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn8:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn12:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn12:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn7=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton7["text"]=num
+                            boton7["state"]=DISABLED
+                            lista.append(7)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original8():
                 global num
                 global btn8
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[3]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[3]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[1]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[1]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==1 and i[2]==3:
-                        if btn9!=0 and btn13!=0:
-                            if i[0]=="<":
-                                if num>=btn9:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn9:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn13:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn13:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn8=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton8["text"]=num
-                        boton8["state"]=DISABLED
-                        lista.append(8)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==3:
+                            if btn9!=0 and btn13!=0:
+                                if i[0]=="<":
+                                    if num>=btn9:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn9:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn13:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn13:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn8=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton8["text"]=num
+                            boton8["state"]=DISABLED
+                            lista.append(8)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original9():
                 global num
                 global btn9
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[4]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[4]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[1]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[1]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==1 and i[2]==4:
-                        if btn14!=0:
-                            if i[0]=="v":
-                                if num<=btn14:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn14:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn9=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton9["text"]=num
-                        boton9["state"]=DISABLED
-                        lista.append(9)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==4:
+                            if btn14!=0:
+                                if i[0]=="v":
+                                    if num<=btn14:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn14:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn9=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton9["text"]=num
+                            boton9["state"]=DISABLED
+                            lista.append(9)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original10():
                 global num
                 global btn10
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[0]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[0]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[2]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[2]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==2 and i[2]==0:
-                        if btn11!=0 and btn15!=0:
-                            if i[0]=="<":
-                                if num>=btn11:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn11:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn15:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn15:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn10=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton10["text"]=num
-                        boton10["state"]=DISABLED
-                        lista.append(10)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==0:
+                            if btn11!=0 and btn15!=0:
+                                if i[0]=="<":
+                                    if num>=btn11:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn11:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn15:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn15:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn10=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton10["text"]=num
+                            boton10["state"]=DISABLED
+                            lista.append(10)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original11():
                 global num
                 global btn11
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[1]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[1]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[2]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[2]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==2 and i[2]==1:
-                        if btn12!=0 and btn16!=0:
-                            if i[0]=="<":
-                                if num>=btn12:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn12:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn16:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn16:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn11=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton11["text"]=num
-                        boton11["state"]=DISABLED
-                        lista.append(11)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==1:
+                            if btn12!=0 and btn16!=0:
+                                if i[0]=="<":
+                                    if num>=btn12:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn12:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn16:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn16:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn11=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton11["text"]=num
+                            boton11["state"]=DISABLED
+                            lista.append(11)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original12():
                 global num
                 global btn12
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[2]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[2]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[2]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[2]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==2 and i[2]==2:
-                        if btn13!=0 and btn17!=0:
-                            if i[0]=="<":
-                                if num>=btn13:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn13:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn17:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn17:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn12=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton12["text"]=num
-                        boton12["state"]=DISABLED
-                        lista.append(12)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==2:
+                            if btn13!=0 and btn17!=0:
+                                if i[0]=="<":
+                                    if num>=btn13:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn13:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn17:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn17:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn12=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton12["text"]=num
+                            boton12["state"]=DISABLED
+                            lista.append(12)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original13():
                 global num
                 global btn13
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[3]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[3]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[2]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[2]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==2 and i[2]==3:
-                        if btn14!=0 and btn18!=0:
-                            if i[0]=="<":
-                                if num>=btn14:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn14:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn18:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn18:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn13=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton13["text"]=num
-                        boton13["state"]=DISABLED
-                        lista.append(13)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==3:
+                            if btn14!=0 and btn18!=0:
+                                if i[0]=="<":
+                                    if num>=btn14:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn14:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn18:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn18:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn13=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton13["text"]=num
+                            boton13["state"]=DISABLED
+                            lista.append(13)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original14():
                 global num
                 global btn14
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[4]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[4]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[2]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[2]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==2 and i[2]==4:
-                        if btn19!=0:
-                            if i[0]=="v":
-                                if num<=btn19:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn19:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn14=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton14["text"]=num
-                        boton14["state"]=DISABLED
-                        lista.append(14)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==4:
+                            if btn19!=0:
+                                if i[0]=="v":
+                                    if num<=btn19:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn19:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn14=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton14["text"]=num
+                            boton14["state"]=DISABLED
+                            lista.append(14)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original15():
                 global num
                 global btn15
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[0]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[0]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[3]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[3]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==3 and i[2]==0:
-                        if btn16!=0 and btn20!=0:
-                            if i[0]=="<":
-                                if num>=btn16:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn16:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn20:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn20:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn15=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton15["text"]=num
-                        boton15["state"]=DISABLED
-                        lista.append(15)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==0:
+                            if btn16!=0 and btn20!=0:
+                                if i[0]=="<":
+                                    if num>=btn16:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn16:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn20:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn20:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn15=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton15["text"]=num
+                            boton15["state"]=DISABLED
+                            lista.append(15)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original16():
                 global num
                 global btn16
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[1]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[1]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[3]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[3]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==3 and i[2]==1:
-                        if btn17!=0 and btn21!=0:
-                            if i[0]=="<":
-                                if num>=btn17:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn17:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn21:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn21:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn16=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton16["text"]=num
-                        boton16["state"]=DISABLED
-                        lista.append(16)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==1:
+                            if btn17!=0 and btn21!=0:
+                                if i[0]=="<":
+                                    if num>=btn17:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn17:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn21:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn21:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn16=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton16["text"]=num
+                            boton16["state"]=DISABLED
+                            lista.append(16)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original17():
                 global num
                 global btn17
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[2]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[2]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[3]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[3]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==3 and i[2]==2:
-                        if btn18!=0 and btn22!=0:
-                            if i[0]=="<":
-                                if num>=btn18:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn18:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn22:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn22:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn17=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton17["text"]=num
-                        boton17["state"]=DISABLED
-                        lista.append(17)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==2:
+                            if btn18!=0 and btn22!=0:
+                                if i[0]=="<":
+                                    if num>=btn18:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn18:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn22:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn22:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn17=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton17["text"]=num
+                            boton17["state"]=DISABLED
+                            lista.append(17)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original18():
                 global num
                 global btn18
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[3]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[3]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[3]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[3]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==3 and i[2]==3:
-                        if btn19!=0 and btn23!=0:
-                            if i[0]=="<":
-                                if num>=btn19:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn19:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                            elif i[0]=="v":
-                                if num<=btn23:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn23:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn18=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton18["text"]=num
-                        boton18["state"]=DISABLED
-                        lista.append(18)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==3:
+                            if btn19!=0 and btn23!=0:
+                                if i[0]=="<":
+                                    if num>=btn19:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn19:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                                elif i[0]=="v":
+                                    if num<=btn23:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn23:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn18=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton18["text"]=num
+                            boton18["state"]=DISABLED
+                            lista.append(18)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original19():
                 global num
                 global btn19
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[4]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[4]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[3]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[3]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==3 and i[2]==4:
-                        if btn24!=0:
-                            if i[0]=="v":
-                                if num<=btn24:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo v ")
-                            elif i[0]=="˄":
-                                if num>=btn24:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo ˄ ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn19=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton19["text"]=num
-                        boton19["state"]=DISABLED
-                        lista.append(19)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==4:
+                            if btn24!=0:
+                                if i[0]=="v":
+                                    if num<=btn24:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo v ")
+                                elif i[0]=="˄":
+                                    if num>=btn24:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo ˄ ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn19=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton19["text"]=num
+                            boton19["state"]=DISABLED
+                            lista.append(19)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original20():
                 global num
                 global btn20
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[0]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[0]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[4]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[4]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==4 and i[2]==0:
-                        if btn21!=0:
-                            if i[0]=="<":
-                                if num>=btn21:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn21:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn20=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton20["text"]=num
-                        boton20["state"]=DISABLED
-                        lista.append(20)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==0:
+                            if btn21!=0:
+                                if i[0]=="<":
+                                    if num>=btn21:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn21:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn20=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton20["text"]=num
+                            boton20["state"]=DISABLED
+                            lista.append(20)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original21():
                 global num
                 global btn21
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[1]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[1]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[4]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[4]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==4 and i[2]==1:
-                        if btn22!=0:
-                            if i[0]=="<":
-                                if num>=btn22:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn22:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn21=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton21["text"]=num
-                        boton21["state"]=DISABLED
-                        lista.append(21)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==1:
+                            if btn22!=0:
+                                if i[0]=="<":
+                                    if num>=btn22:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn22:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn21=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton21["text"]=num
+                            boton21["state"]=DISABLED
+                            lista.append(21)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original22():
                 global num
                 global btn22
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[2]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[2]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[4]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[4]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==4 and i[2]==2:
-                        if btn23!=0:
-                            if i[0]=="<":
-                                if num>=btn23:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn23:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn22=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton22["text"]=num
-                        boton22["state"]=DISABLED
-                        lista.append(22)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==2:
+                            if btn23!=0:
+                                if i[0]=="<":
+                                    if num>=btn23:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn23:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn22=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton22["text"]=num
+                            boton22["state"]=DISABLED
+                            lista.append(22)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original23():
                 global num
                 global btn23
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[3]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[3]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[4]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[4]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==4 and i[2]==3:
-                        if btn24!=0:
-                            if i[0]=="<":
-                                if num>=btn24:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num<=btn24:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn23=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton23["text"]=num
-                        boton23["state"]=DISABLED
-                        lista.append(23)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==3:
+                            if btn24!=0:
+                                if i[0]=="<":
+                                    if num>=btn24:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num<=btn24:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn23=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton23["text"]=num
+                            boton23["state"]=DISABLED
+                            lista.append(23)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             def original24():
                 global num
                 global btn24
                 global cuadricula
                 global listaborrada
+                global sugerido
                 listaborrada=[]
                 cumple=0
-                for i in cuadricula:
-                    if num==i[4]:
+                if sugerido==0:
+                    for i in cuadricula:
+                        if num==i[4]:
+                            cumple=1
+                            messagebox.showerror(message="Este numero ya esta en esta columna")
+                    if num in cuadricula[4]:
                         cumple=1
-                        messagebox.showerror(message="Este numero ya esta en esta columna")
-                if num in cuadricula[4]:
-                    cumple=1
-                    messagebox.showerror(message="Este numero ya está en la fila")
-                for i in plantilla:
-                    if i[1]==4 and i[2]==3:
-                        if btn23!=0:
-                            if i[0]=="<":
-                                if num<=btn23:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo < ")
-                            elif i[0]==">":
-                                if num>=btn23:
-                                    cumple=1
-                                    messagebox.showerror(message="numero no cumple con el signo > ")
-                if cumple==0:
-                    if num=="1":
-                        Boton0_num["bg"]="white"
-                    elif num=="2":
-                        Boton1_num["bg"]="white"
-                    elif num=="3":
-                        Boton2_num["bg"]="white"
-                    elif num=="4":
-                        Boton3_num["bg"]="white"
-                    else:
-                        Boton4_num["bg"]="white"
-                    if num!="":
-                        btn24=num
-                        cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
-                        boton24["text"]=num
-                        boton24["state"]=DISABLED
-                        lista.append(24)
-                        num=""
-                        ganar(cuadricula)
+                        messagebox.showerror(message="Este numero ya está en la fila")
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==3:
+                            if btn23!=0:
+                                if i[0]=="<":
+                                    if num<=btn23:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo < ")
+                                elif i[0]==">":
+                                    if num>=btn23:
+                                        cumple=1
+                                        messagebox.showerror(message="numero no cumple con el signo > ")
+                    if cumple==0:
+                        if num=="1":
+                            Boton0_num["bg"]="white"
+                        elif num=="2":
+                            Boton1_num["bg"]="white"
+                        elif num=="3":
+                            Boton2_num["bg"]="white"
+                        elif num=="4":
+                            Boton3_num["bg"]="white"
+                        else:
+                            Boton4_num["bg"]="white"
+                        if num!="":
+                            btn24=num
+                            cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                            boton24["text"]=num
+                            boton24["state"]=DISABLED
+                            lista.append(24)
+                            num=""
+                            ganar(cuadricula)
+                else:
+                    sugerencia()
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    messagebox.showinfo(nuevalista)
             #reloj
             def parar():
                 global proceso
@@ -1821,6 +2181,8 @@ def VentanaPrincipal():
                     Boton2_J["state"]=Estado
                     Boton3_J["state"]=Estado
                     Boton4_J["state"]=Estado
+                    Boton5_J["state"]=Estado
+                    Boton6_J["state"]=Estado
                     boton0["state"]=Estado
                     boton1["state"]=Estado
                     boton2["state"]=Estado
@@ -1851,6 +2213,7 @@ def VentanaPrincipal():
                     Boton2_num["state"]=Estado
                     Boton3_num["state"]=Estado
                     Boton4_num["state"]=Estado
+                    Botonsugerencia["state"]=Estado
                     btn["state"]=DISABLED
                     secs=sec.get()
                     mins=minuto.get()
@@ -1865,9 +2228,11 @@ def VentanaPrincipal():
                         Mensaje_tiempo=Label(Ventana_Z,text="Se acabó el tiempo, desea continuar?",font=("Arial",10),bg='beige')
                         Mensaje_tiempo.place(x=25,y=10)
                         def aceptarT():
-                            global reloj
-                            reloj=1
-                            guardar()
+                            global relojC
+                            relojC=1
+                            reloj=relojC
+                            relojC=reloj
+                            guardar(reloj)
                             Ventana_J.destroy()
                             Ventana_Z.destroy()
                             cargar()
@@ -2338,6 +2703,9 @@ def VentanaPrincipal():
                             lbl25.place(x=605,y=435)
             #boton de terminar partida   
             def terminar():
+                global sugerido
+                if sugerido==1:
+                    sugerencia()
                 Ventana_T=Tk()
                 Ventana_T.geometry('300x75+650+700')
                 Ventana_T.title('Futoshiki')
@@ -2356,14 +2724,16 @@ def VentanaPrincipal():
                 btno=Button(Ventana_T,text="NO",width='5',height='1',command=denegar)
                 btno.place(x=60,y=30)
             #guarda la partida
-            def guardar():
+            def guardar(reloj):
+                global sugerido
+                if sugerido==1:
+                    sugerencia()
                 filesize=os.path.getsize("futoshiki2020juegoactual.dat")
                 if filesize!=0:
                     file = open("futoshiki2020juegoactual.dat","r+")
                     file.truncate(0)
                     file.close()
                 d=open("futoshiki2020juegoactual.dat","wb")
-                reloj=reloj.get()
                 pickle.dump([Nombre,reloj,lado,[plantilla,cuadricula,lista,nivelmult],continuo],d)
                 d.close()
             #rehace jugada
@@ -2397,6 +2767,9 @@ def VentanaPrincipal():
                 global btn23
                 global btn24
                 global cuadricula
+                global sugerido
+                if sugerido==1:
+                    sugerencia()
                 if listaborrada==[]:
                     messagebox.showerror(message="Error, ya no hay jugadas borradas")
                 elif listaborrada[-1][0]==0:
@@ -2604,7 +2977,25 @@ def VentanaPrincipal():
                 n=0
             #da sugerencias posibles para una casilla
             def sugerencia():
-                nada=0
+                global sugerido
+                if sugerido==0:
+                    sugerido=1
+                    Botonsugerencia["text"]="Posibles Jugadas: Encendido"
+                    Botonsugerencia["bg"]="green"
+                    Boton0_num["state"]=DISABLED
+                    Boton1_num["state"]=DISABLED
+                    Boton2_num["state"]=DISABLED
+                    Boton3_num["state"]=DISABLED
+                    Boton4_num["state"]=DISABLED
+                else:
+                    sugerido=0
+                    Botonsugerencia["text"]="Posibles Jugadas: Apagado"
+                    Botonsugerencia["bg"]="white"
+                    Boton0_num["state"]="normal"
+                    Boton1_num["state"]="normal"
+                    Boton2_num["state"]="normal"
+                    Boton3_num["state"]="normal"
+                    Boton4_num["state"]="normal"
             #botones
             Boton1_J=Button(Ventana_J,text="Borrar Jugada",width='13',height='3',font=("Arial",15),bg='#EF9A54',fg="black",state=Estado,command=anterior)
             Boton1_J.place(x=25,y=520)
@@ -2612,7 +3003,7 @@ def VentanaPrincipal():
             Boton2_J.place(x=225,y=520)
             Boton3_J=Button(Ventana_J,text="Terminar Juego",width='13',height='3',font=("Arial",15),bg='#C50000',fg="black",state=Estado,command=terminar)
             Boton3_J.place(x=425,y=520)
-            Boton4_J=Button(Ventana_J,text="Guardar Juego",width='13',height='3',font=("Arial",15),bg='#8E9CFF',fg="black",state=Estado,command=guardar)
+            Boton4_J=Button(Ventana_J,text="Guardar Juego",width='13',height='3',font=("Arial",15),bg='#8E9CFF',fg="black",state=Estado,command=lambda:guardar(relojC))
             Boton4_J.place(x=625,y=520)
             Boton5_J=Button(Ventana_J,text="Rehacer Jugada",width='13',height='3',font=("Arial",15),bg='#BFE1BB',fg="black",state=Estado,command=rehacer)
             Boton5_J.place(x=425,y=620)

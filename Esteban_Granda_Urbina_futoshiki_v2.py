@@ -2974,7 +2974,1180 @@ def VentanaPrincipal():
                     cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
             #soluciona el futoshiki
             def solucionar():
-                n=0
+                global num
+                global btn0
+                global btn1
+                global btn2
+                global btn3
+                global btn4
+                global btn5
+                global btn6
+                global btn7
+                global btn8
+                global btn9
+                global btn10
+                global btn11
+                global btn12
+                global btn13
+                global btn14
+                global btn15
+                global btn16
+                global btn17
+                global btn18
+                global btn19
+                global btn20
+                global btn21
+                global btn22
+                global btn23
+                global btn24
+                global cuadricula
+                global gano
+                gano=False
+                def cerrarCOPY():
+                    Ventana_J.destroy()
+                    Ventana_C.deiconify()
+                def originalC0(num):
+                    global btn0
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[0]:
+                            return False
+                    if num in cuadricula[0]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==0:
+                            if btn1!=0 and btn5!=0:
+                                if i[0]=="<":
+                                    if num>=btn1:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn1:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn5:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn5:
+                                        return False
+                    btn0=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton0["text"]=num
+                    boton0["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC1(num):
+                    global btn1
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[1]:
+                            return False
+                    if num in cuadricula[0]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==1:
+                            if btn2!=0 and btn6!=0:
+                                if i[0]=="<":
+                                    if num>=btn2:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn2:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn6:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn6:
+                                        return False
+                    btn1=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton1["text"]=num
+                    boton1["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC2(num):
+                    global btn2
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[2]:
+                            return False
+                    if num in cuadricula[0]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==2:
+                            if btn3!=0 and btn7!=0:
+                                if i[0]=="<":
+                                    if num>=btn3:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn3:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn7:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn7:
+                                        return False
+                    btn2=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton2["text"]=num
+                    boton2["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC3(num):
+                    global btn3
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[3]:
+                            return False
+                    if num in cuadricula[0]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==3:
+                            if btn4!=0 and btn8!=0:
+                                if i[0]=="<":
+                                    if num>=btn3:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn3:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn8:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn8:
+                                        return False
+                    btn3=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton3["text"]=num
+                    boton3["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC4(num):
+                    global btn4
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[4]:
+                            return False
+                    if num in cuadricula[0]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==0 and i[2]==4:
+                            if btn9!=0:
+                                if i[0]=="v":
+                                    if num<=btn9:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn9:
+                                        return False
+                    btn4=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton4["text"]=num
+                    boton4["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC5(num):
+                    global btn5
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[0]:
+                            return False
+                    if num in cuadricula[1]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==0:
+                            if btn6!=0 and btn10!=0:
+                                if i[0]=="<":
+                                    if num>=btn6:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn6:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn10:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn10:
+                                        return False
+                    btn5=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton5["text"]=num
+                    boton5["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC6(num):
+                    global btn6
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[1]:
+                            return False
+                    if num in cuadricula[1]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==1:
+                            if btn7!=0 and btn11!=0:
+                                if i[0]=="<":
+                                    if num>=btn7:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn7:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn11:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn11:
+                                        return False
+                    btn6=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton6["text"]=num
+                    boton6["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC7(num):
+                    global btn7
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[2]:
+                            return False
+                    if num in cuadricula[1]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==2:
+                            if btn8!=0 and btn12!=0:
+                                if i[0]=="<":
+                                    if num>=btn8:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn8:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn12:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn12:
+                                        return False
+                    btn7=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton7["text"]=num
+                    boton7["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC8(num):
+                    global btn8
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[3]:
+                            return False
+                    if num in cuadricula[1]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==3:
+                            if btn9!=0 and btn13!=0:
+                                if i[0]=="<":
+                                    if num>=btn9:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn9:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn13:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn13:
+                                        return False
+                    btn8=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton8["text"]=num
+                    boton8["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC9(num):
+                    global btn9
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[4]:
+                            return False
+                    if num in cuadricula[1]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==1 and i[2]==4:
+                            if btn14!=0:
+                                if i[0]=="v":
+                                    if num<=btn14:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn14:
+                                        return False
+                    btn9=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton9["text"]=num
+                    boton9["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC10(num):
+                    global btn10
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[0]:
+                            return False
+                    if num in cuadricula[2]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==0:
+                            if btn11!=0 and btn15!=0:
+                                if i[0]=="<":
+                                    if num>=btn11:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn11:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn15:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn15:
+                                        return False
+                    btn10=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton10["text"]=num
+                    boton10["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC11(num):
+                    global btn11
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[1]:
+                            return False
+                    if num in cuadricula[2]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==1:
+                            if btn12!=0 and btn16!=0:
+                                if i[0]=="<":
+                                    if num>=btn12:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn12:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn16:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn16:
+                                        return False
+                    btn11=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton11["text"]=num
+                    boton11["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC12(num):
+                    global btn12
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[2]:
+                            return False
+                    if num in cuadricula[2]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==2:
+                            if btn13!=0 and btn17!=0:
+                                if i[0]=="<":
+                                    if num>=btn13:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn13:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn17:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn17:
+                                        return False
+                    btn12=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton12["text"]=num
+                    boton12["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC13(num):
+                    global btn13
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[3]:
+                            return False
+                    if num in cuadricula[2]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==3:
+                            if btn14!=0 and btn18!=0:
+                                if i[0]=="<":
+                                    if num>=btn14:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn14:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn18:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn18:
+                                        return False
+                    btn13=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton13["text"]=num
+                    boton13["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC14(num):
+                    global btn14
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[4]:
+                            return False
+                    if num in cuadricula[2]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==2 and i[2]==4:
+                            if  btn19!=0:
+                                if i[0]=="v":
+                                    if num<=btn19:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn19:
+                                        return False
+                    btn14=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton14["text"]=num
+                    boton14["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC15(num):
+                    global btn15
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[0]:
+                            return False
+                    if num in cuadricula[3]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==0:
+                            if btn16!=0 and btn20!=0:
+                                if i[0]=="<":
+                                    if num>=btn16:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn16:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn20:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn20:
+                                        return False
+                    btn15=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton15["text"]=num
+                    boton15["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC16(num):
+                    global btn16
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[1]:
+                            return False
+                    if num in cuadricula[3]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==1:
+                            if btn17!=0 and btn21!=0:
+                                    if i[0]=="<":
+                                        if num>=btn17:
+                                            return False
+                                    elif i[0]==">":
+                                        if num<=btn17:
+                                            return False
+                                    elif i[0]=="v":
+                                        if num<=btn21:
+                                            return False
+                                    elif i[0]=="˄":
+                                        if num>=btn21:
+                                            return False
+                    btn16=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton16["text"]=num
+                    boton16["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC17(num):
+                    global btn17
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[2]:
+                            return False
+                    if num in cuadricula[3]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==2:
+                            if btn18!=0 and btn22!=0:
+                                if i[0]=="<":
+                                    if num>=btn18:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn18:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn22:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn22:
+                                        return False
+                    btn17=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton17["text"]=num
+                    boton17["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC18(num):
+                    global btn18
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[3]:
+                            return False
+                    if num in cuadricula[3]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==3:
+                            if btn19!=0 and btn23!=0:
+                                if i[0]=="<":
+                                    if num>=btn18:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn18:
+                                        return False
+                                elif i[0]=="v":
+                                    if num<=btn23:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn23:
+                                        return False
+                    btn18=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton18["text"]=num
+                    boton18["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC19(num):
+                    global btn19
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[4]:
+                            return False
+                    if num in cuadricula[3]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==3 and i[2]==4:
+                            if btn24!=0:
+                                if i[0]=="v":
+                                    if num<=btn24:
+                                        return False
+                                elif i[0]=="˄":
+                                    if num>=btn24:
+                                        return False
+                    btn19=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton19["text"]=num
+                    boton19["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC20(num):
+                    global btn20
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[0]:
+                            return False
+                    if num in cuadricula[4]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==0:
+                            if btn21!=0:
+                                if i[0]=="<":
+                                    if num>=btn21:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn21:
+                                        return False
+                    btn20=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton20["text"]=num
+                    boton20["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC21(num):
+                    global btn21
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[1]:
+                            return False
+                    if num in cuadricula[4]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==1:
+                            if btn22!=0:
+                                if i[0]==">":
+                                    if num<=btn22:
+                                        return False
+                                elif i[0]=="<":
+                                    if num>=btn22:
+                                        return False
+                    btn21=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton21["text"]=num
+                    boton21["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC22(num):
+                    global btn22
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[2]:
+                            return False
+                    if num in cuadricula[4]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==2:
+                            if btn23!=0:
+                                if i[0]=="<":
+                                    if num>=btn23:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn23:
+                                        return False
+                    btn22=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton22["text"]=num
+                    boton22["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC23(num):
+                    global btn23
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[3]:
+                            return False
+                    if num in cuadricula[4]:
+                        return False
+                    for i in plantilla:
+                        if i[1]==4 and i[2]==3:
+                            if btn24!=0:
+                                if i[0]=="<":
+                                    if num>=btn24:
+                                        return False
+                                elif i[0]==">":
+                                    if num<=btn24:
+                                        return False
+                    btn23=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton23["text"]=num
+                    boton23["state"]=DISABLED
+                    num=""
+                    return True
+                def originalC24(num):
+                    global btn24
+                    global cuadricula
+                    for i in cuadricula:
+                        if num==i[4]:
+                            return False
+                    if num in cuadricula[4]:
+                        return False
+                    btn24=num
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+                    boton24["text"]=num
+                    boton24["state"]=DISABLED
+                    num=""
+                    return True
+                def ganarCOPY(cuadricula):
+                    ceros=0
+                    for i in cuadricula:
+                        for j in i:
+                            if j==0 or j=="0" or j=="":
+                                ceros+=1
+                    if ceros==0:
+                        return True
+                    else:
+                        return False
+                while gano==False:
+                    btn0=0
+                    btn1=0
+                    btn2=0
+                    btn3=0
+                    btn4=0
+                    btn5=0
+                    btn6=0
+                    btn7=0
+                    btn8=0
+                    btn9=0
+                    btn10=0
+                    btn11=0
+                    btn12=0
+                    btn13=0
+                    btn14=0
+                    btn15=0
+                    btn16=0
+                    btn17=0
+                    btn18=0
+                    btn19=0
+                    btn20=0
+                    btn21=0
+                    btn22=0
+                    btn23=0
+                    btn24=0
+                    cuadricula=[[btn0,btn1,btn2,btn3,btn4],[btn5,btn6,btn7,btn8,btn9],[btn10,btn11,btn12,btn13,btn14],[btn15,btn16,btn17,btn18,btn19],[btn20,btn21,btn22,btn23,btn24]]
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC0(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC1(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC2(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC3(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[0]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC4(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC5(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC6(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC7(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC8(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[1]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC9(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC10(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC11(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC12(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC13(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[2]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC14(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC15(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC16(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC17(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC18(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[3]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC19(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[0])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC20(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[1])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC21(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[2])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC22(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[3])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC23(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    listadenumeros=["1","2","3","4","5"]
+                    nuevalista=[]
+                    listavertical=[]
+                    for i in cuadricula:
+                        listavertical.append(i[4])
+                    listahorizontal=cuadricula[4]
+                    for j in listadenumeros:
+                        if (j not in listavertical) and (j not in listahorizontal) :
+                            nuevalista.append(j)
+                    if nuevalista!=[]:
+                        num=random.choice(nuevalista)
+                    else:
+                        num=""
+                    while originalC24(num)!=True and nuevalista!=[]:
+                        nuevalista.remove(num)
+                        num=random.choice(nuevalista)
+
+                    gano=ganarCOPY(cuadricula)
+                Boton1_J["state"]=DISABLED
+                Boton2_J["state"]=DISABLED
+                Boton3_J["state"]=DISABLED   
+                Boton4_J["state"]=DISABLED
+                Boton5_J["state"]=DISABLED
+                Boton6_J["state"]=DISABLED
+                Boton0_num["state"]=DISABLED
+                Boton1_num["state"]=DISABLED
+                Boton2_num["state"]=DISABLED
+                Boton3_num["state"]=DISABLED
+                Boton4_num["state"]=DISABLED
+                Botonsugerencia["state"]=DISABLED
+                Mensaje_ganar=Message(Ventana_J,text="JUEGO TERMINADO CON ÉXITO",width='885',font=("Comic Sans",40),bg="#C2D8FB",fg="black")
+                Mensaje_ganar.place(x=10,y=475)
+                btfin=Button(Ventana_J,text="FIN",width='11',height='3',command=cerrarCOPY)
+                btfin.place(x=300,y=200)
             #da sugerencias posibles para una casilla
             def sugerencia():
                 global sugerido
